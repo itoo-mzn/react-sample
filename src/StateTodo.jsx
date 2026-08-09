@@ -5,6 +5,8 @@ export default function StateTodo() {
   const [maxId, setMaxId] = useState(1);
   const [title, setTitle] = useState("");
   const [todo, setTodo] = useState([]);
+  // ソート順。降順ならtrue
+  const [desc, setDesc] = useState(true);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -39,6 +41,19 @@ export default function StateTodo() {
     );
   };
 
+  const handleSort = () => {
+    const sorted = [...todo];
+    sorted.sort((m, n) => {
+      if (desc) {
+        return n.created.getTime() - m.created.getTime();
+      } else {
+        return m.created.getTime() - n.created.getTime();
+      }
+    });
+    setDesc(!desc);
+    setTodo(sorted);
+  };
+
   const handleRemove = (e) => {
     setTodo(todo.filter((item) => item.id !== Number(e.target.dataset.id)));
   };
@@ -56,6 +71,9 @@ export default function StateTodo() {
       </label>
       <button type="button" onClick={handleClick}>
         追加
+      </button>
+      <button type="button" onClick={handleSort}>
+        ソート（{desc ? "↑" : "↓"}）
       </button>
       <hr />
       <ul>
