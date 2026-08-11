@@ -7,19 +7,21 @@ const schema = yup.object({
   name: yup
     .string()
     .label("名前")
-    .required(`${label}は必須です`)
-    .max(20, `${label}は${max}文字以内で入力してください`),
+    .trim()
+    .lowercase()
+    .required("${label}は必須です")
+    .max(20, "${label}は${max}文字以内で入力してください"),
   email: yup
     .string()
     .label("メールアドレス")
-    .required(`${label}は必須です`)
-    .email(`${label}の形式で入力してください`),
-  gender: yup.string().label("性別").required(`${label}は必須です`),
+    .required("${label}は必須です")
+    .email("${label}の形式で入力してください"),
+  gender: yup.string().label("性別").required("${label}は必須です"),
   memo: yup
     .string()
     .label("備考")
-    .required(`${label}は必須です`)
-    .min(10, `${label}は${min}文字以上で入力してください`),
+    .required("${label}は必須です")
+    .min(10, "${label}は${min}文字以上で入力してください"),
 });
 
 export default function FormBasic() {
