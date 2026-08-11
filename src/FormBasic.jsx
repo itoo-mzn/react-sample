@@ -1,5 +1,26 @@
 import { useForm } from "react-hook-form";
 import "./FormBasic.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  name: yup
+    .string()
+    .label("名前")
+    .required(`${label}は必須です`)
+    .max(20, `${label}は${max}文字以内で入力してください`),
+  email: yup
+    .string()
+    .label("メールアドレス")
+    .required(`${label}は必須です`)
+    .email(`${label}の形式で入力してください`),
+  gender: yup.string().label("性別").required(`${label}は必須です`),
+  memo: yup
+    .string()
+    .label("備考")
+    .required(`${label}は必須です`)
+    .min(10, `${label}は${min}文字以上で入力してください`),
+});
 
 export default function FormBasic() {
   const defaultValues = {
@@ -16,6 +37,8 @@ export default function FormBasic() {
     formState: { errors },
   } = useForm({
     defaultValues,
+    // Yupにバリデーションを任せる
+    resolver: yupResolver(schema),
   });
 
   const onsubmit = (data) => console.log(data);
@@ -26,31 +49,14 @@ export default function FormBasic() {
       <div>
         <label htmlFor="name">名前</label>
         <br />
-        <input
-          id="name"
-          type="text"
-          {...register("name", {
-            required: "名前は必須です",
-            maxLength: {
-              value: 20,
-              message: "名前は20文字以内で入力してください",
-            },
-          })}
-        />
+        <input id="name" type="text" {...register("name")} />
         <div className="error">{errors.name?.message}</div>
       </div>
       <div>
         <label>性別：</label>
         <br />
         <label>
-          <input
-            id="male"
-            type="radio"
-            value="male"
-            {...register("gender", {
-              required: "性別は必須です",
-            })}
-          />
+          <input id="male" type="radio" value="male" {...register("gender")} />
           男性
         </label>
         <label>
@@ -58,9 +64,7 @@ export default function FormBasic() {
             id="female"
             type="radio"
             value="female"
-            {...register("gender", {
-              required: "性別は必須です",
-            })}
+            {...register("gender")}
           />
           女性
         </label>
@@ -69,32 +73,13 @@ export default function FormBasic() {
       <div>
         <label htmlFor="email">メールアドレス：</label>
         <br />
-        <input
-          id="email"
-          type="email"
-          {...register("email", {
-            required: "メールアドレスは必須です",
-            pattern: {
-              value: /^[a-z\-\d._%+]+@[a-z\-\d]+(?:\.[a-z\-\d]+)*\.[a-z]{2,}$/i,
-              message: "メールアドレスの形式で入力してください",
-            },
-          })}
-        />
+        <input id="email" type="email" {...register("email")} />
         <div className="error">{errors.email?.message}</div>
       </div>
       <div>
         <label htmlFor="memo">備考：</label>
         <br />
-        <textarea
-          id="memo"
-          {...register("memo", {
-            required: "備考は必須です",
-            minLength: {
-              value: 10,
-              message: "備考は10文字以上で入力してください",
-            },
-          })}
-        />
+        <textarea id="memo" {...register("memo")} />
         <div className="error">{errors.memo?.message}</div>
       </div>
       <div>
