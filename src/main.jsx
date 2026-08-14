@@ -1,10 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import SuspenseSimple from "./SuspenseSimple.jsx";
+import ModuleBasic from "./ModuleBasic.jsx";
 
 createRoot(document.getElementById("root")).render(
-  // <StrictMode>
-  <SuspenseSimple />,
-  // </StrictMode>
+  <>
+    <h3 className="head">CSS Modules</h3>
+    <ModuleBasic />
+  </>,
 );
