@@ -1,6 +1,18 @@
+import { useErrorBoundary } from "react-error-boundary";
+
 export default function ErrorThrow() {
-  if (Math.random() < 0.6) {
-    throw new Error("An error occured");
-  }
-  return <p>正しく実行されました。</p>;
+  const { showBoundary } = useErrorBoundary();
+  const handleClick = () => {
+    try {
+      throw new Error("An error occured");
+    } catch (e) {
+      showBoundary(e);
+    }
+  };
+
+  return (
+    <button type="button" onClick={handleClick}>
+      エラーイベント
+    </button>
+  );
 }
