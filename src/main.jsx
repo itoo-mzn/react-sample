@@ -1,9 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import MotionVariant from "./MotionVariant.jsx";
+import PortalBasic from "./PortalBasic.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <MotionVariant />
-  </StrictMode>,
+  // <StrictMode>
+  //   <MotionVariant />
+  // </StrictMode>,
+  <>
+    <div id="dialog"></div>
+    <PortalBasic />
+  </>,
 );
