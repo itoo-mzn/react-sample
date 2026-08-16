@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import ErrorRoot from "./ErrorRoot.jsx";
+import MaterialBasic from "./MaterialBasic.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ErrorRoot />
+    <MaterialBasic />
   </StrictMode>,
 );
