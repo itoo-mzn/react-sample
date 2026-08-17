@@ -4,6 +4,26 @@ import MyButton from "./MyButton";
 export default {
   title: "MyApp/MyButton",
   component: MyButton,
+  argTypes: {
+    primary: {
+      type: "boolean",
+      description: "Primaryカラーを有効にするか",
+    },
+    backgroundColor: {
+      type: "string",
+    },
+    size: {
+      type: "enum",
+      options: ["small", "medium", "large"],
+    },
+    label: {
+      type: "string",
+    },
+    onClick: {
+      type: "function",
+      description: "clickハンドラー",
+    },
+  },
 };
 
 export const Index = {
