@@ -1,5 +1,6 @@
 import MyButton from "./MyButton";
 import { action } from "storybook/actions";
+import { userEvent, within, expect, fn } from "storybook/test";
 
 // ストーリーの基本情報
 export default {
@@ -35,7 +36,15 @@ export const Index = {
     primary: true,
     size: "medium",
     label: "ボタン",
-    onClick: () => console.log("Hello"),
+    // storybookが提供するスパイ関数。裏で、関数の呼び出し回数や引数などを追跡。こういうイディオムだと捉えてOK
+    onClick: fn(),
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button");
+    await userEvent.click(button);
+    await userEvent.click(button);
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
   },
 };
 
