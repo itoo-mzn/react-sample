@@ -29,6 +29,7 @@ export default {
       description: "clickハンドラー",
     },
   },
+  tags: ["autodocs"],
 };
 
 export const Index = {
