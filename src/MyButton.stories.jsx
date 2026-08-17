@@ -1,9 +1,13 @@
 import MyButton from "./MyButton";
+import { action } from "storybook/actions";
 
 // ストーリーの基本情報
 export default {
   title: "MyApp/MyButton",
   component: MyButton,
+  args: {
+    onClick: action("CLICK"),
+  },
   argTypes: {
     primary: {
       type: "boolean",
