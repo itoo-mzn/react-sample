@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import SWRPre from "./SWRPre.jsx";
+import SWRBasic from "./SWRBasic.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SWRPre />
+    <SWRBasic />
   </StrictMode>,
 );
