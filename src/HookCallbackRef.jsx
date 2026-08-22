@@ -1,16 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export default function HookCallbackRef() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const address = useRef(null);
-  // 住所項目が空でなければ住所項目にフォーカスする
-  useEffect(() => {
-    if (address.current) {
-      address.current.focus();
-    }
-  }, [show]);
+  // ref属性にこういったコールバック関数を渡すことで、
+  // そのDOMが生成/破棄されるタイミングでそのDOM自体を操作できる
+  const callbackRef = (elem) => elem?.focus();
 
   return (
     <>
@@ -27,7 +23,7 @@ export default function HookCallbackRef() {
       {show && (
         <div>
           <label htmlFor="address">住所：</label>
-          <input id="address" type="text" />
+          <input id="address" type="text" ref={callbackRef} />
         </div>
       )}
     </>
