@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import SWRApp from "./SWRApp.jsx";
+import HookRefNg from "./HookRefNg.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SWRApp />
+    <HookRefNg />
   </StrictMode>,
 );
