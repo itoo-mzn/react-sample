@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-export default function HookRefNg() {
+export default function HookRef() {
   // 関数コンポーネントは再描画のたび（stateが変わるたび）に実行されるため、
   // このローカル変数はそのたびに初期化される
   // なので、このタイマー機能はバグっている
-  let id = null;
+  // let id = null;
+
+  // useRefはコンポーネント自体が破棄されるまで保持するため解決する
+  const id = useRef(null);
+
   const [count, setCount] = useState(0);
 
   const handleStart = () => {
-    if (id === null) {
-      id = setInterval(() => setCount((c) => c + 1), 1000);
+    if (id.current === null) {
+      id.current = setInterval(() => setCount((c) => c + 1), 1000);
     }
   };
 
   const handleEnd = () => {
-    clearInterval(id);
-    id = null;
+    clearInterval(id.current);
+    id.current = null;
   };
 
   return (

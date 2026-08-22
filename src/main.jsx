@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import HookRefNg from "./HookRefNg.jsx";
+import HookRef from "./HookRef.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <HookRefNg />
+    <HookRef />
   </StrictMode>,
 );
