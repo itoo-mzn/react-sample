@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import HookCallbackRef from "./HookCallbackRef.jsx";
+import HookReducer from "./HookReducer.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <HookCallbackRef />
+    <HookReducer init={0} />
   </StrictMode>,
 );
