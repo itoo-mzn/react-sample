@@ -1,9 +1,9 @@
-import { atomWithReset } from "jotai/utils";
+import { atomWithReset, atomWithStorage } from "jotai/utils";
 import { atom } from "jotai";
 
 export const counterAtom = atomWithReset(0);
 
-export const todosAtom = atom([
+export const todosAtom = atomWithStorage("todos", [
   {
     id: 1,
     title: "資料作成",
