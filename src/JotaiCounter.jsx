@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
-import { counterAtom } from "./atom";
+import { counterAtom } from "./store/atom";
 
 export default function JotaiCounter() {
   const [counter, setCounter] = useAtom(counterAtom);
