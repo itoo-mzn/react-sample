@@ -1,50 +1,25 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
-import { todoLastIdAtom, todosAtom } from "./store/atom";
+import {
+  todosAtom,
+  todoAddAtom,
+  todoDoneAtom,
+  todoRemoveAtom,
+} from "./store/atom";
 import "./StateTodo.css";
 
 export default function JotaiTodo() {
   const [title, setTitle] = useState("");
-  const [todo, setTodo] = useAtom(todosAtom);
-  const maxId = useAtomValue(todoLastIdAtom);
+  const todo = useAtomValue(todosAtom);
 
-  const handleChangeTitle = (e) => {
-    setTitle(e.target.value);
-  };
+  const todoAdd = useSetAtom(todoAddAtom);
+  const todoDone = useSetAtom(todoDoneAtom);
+  const todoRemove = useSetAtom(todoRemoveAtom);
 
-  const handleAdd = () => {
-    setTodo([
-      ...todo,
-      {
-        id: maxId + 1,
-        title,
-        isDone: false,
-      },
-    ]);
-  };
-
-  const handleDone = (e) => {
-    setTodo(
-      todo.map((item) => {
-        if (item.id === Number(e.target.dataset.id)) {
-          return {
-            ...item,
-            isDone: true,
-          };
-        } else {
-          return item;
-        }
-      }),
-    );
-  };
-
-  const handleRemove = (e) => {
-    setTodo(
-      todo.filter((item) => {
-        item.id !== Number(e.target.dataset.id);
-      }),
-    );
-  };
+  const handleChangeTitle = (e) => setTitle(e.target.value);
+  const handleAdd = () => todoAdd(title);
+  const handleDone = (e) => todoDone(e.target.dataset.id);
+  const handleRemove = (e) => todoRemove(e.target.dataset.id);
 
   return (
     <div>
