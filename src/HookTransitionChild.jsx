@@ -3,7 +3,7 @@ import books from "./books";
 
 const sleep = (delay) => {
   const start = Date.now();
-  while (Date.now - start < delay);
+  while (Date.now() - start < delay);
 };
 
 export function BookDetails({ isbn }) {
