@@ -1,9 +1,9 @@
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import HookMemo from "./HookMemo.jsx";
+import HookTransition from "./HookTransition.jsx";
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
-  <HookMemo />,
+  <HookTransition />,
   // </StrictMode>,
 );
