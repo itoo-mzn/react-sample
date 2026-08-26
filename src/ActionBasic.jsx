@@ -1,32 +1,30 @@
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { updateForm } from "./action";
 
 export default function BookForm() {
   const [books, setBooks] = useState([]);
-  const [error, setError] = useState(null);
-  const [isPending, setIsPending] = useState(false);
 
-  const submitAction = async (e) => {
-    e.preventDefault();
-    setIsPending(true);
-
-    const { result, errors } = await updateForm({
-      id: crypto.randomUUID(),
-      title: e.target.title.value,
-      price: e.target.price.value,
-      published: e.target.published.value,
-    });
-
-    setIsPending(false);
-    setError(errors);
-    if (errors) {
-      return;
-    }
-    setBooks((prevBooks) => [...prevBooks, result]);
-  };
+  const [error, submitAction, isPending] = useActionState(
+    // サブミット時に呼び出される関数
+    async (prevState, formData) => {
+      const { result, errors } = await updateForm({
+        id: crypto.randomUUID(),
+        title: formData.get("title"),
+        price: formData.get("price"),
+        published: formData.get("published"),
+      });
+      if (!errors) {
+        setBooks((prevBooks) => [...prevBooks, result]);
+      }
+      return errors;
+    },
+    // アクションに関連するStateの初期値
+    null,
+  );
 
   return (
-    <form noValidate onSubmit={submitAction}>
+    // form要素のaction属性にsubmit関数を渡す
+    <form noValidate action={submitAction}>
       <ul>
         {error?.map((msg) => (
           <li key={msg}>{msg}</li>
