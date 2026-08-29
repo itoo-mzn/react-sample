@@ -22,6 +22,9 @@ export default defineConfig({
     }),
   ],
   test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./vitest-setup.js"],
     // projects: [{
     //   extends: true,
     //   plugins: [
